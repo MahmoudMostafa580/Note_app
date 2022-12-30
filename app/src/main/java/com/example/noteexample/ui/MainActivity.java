@@ -17,9 +17,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.example.noteexample.NoteViewModel;
 import com.example.noteexample.R;
@@ -45,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
         setSupportActionBar(mainBinding.toolbar);
 
-        mainBinding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mainBinding.recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         mainBinding.recyclerView.setHasFixedSize(true);
         mainBinding.recyclerView.setVisibility(View.INVISIBLE);
         noteAdapter = new NoteAdapter();
@@ -105,9 +107,8 @@ public class MainActivity extends AppCompatActivity {
                             Intent intent = result.getData();
                             String title = intent.getStringExtra(AddNoteActivity.TITLE_KEY);
                             String description = intent.getStringExtra(AddNoteActivity.DESCRIPTION_KEY);
-                            int priority = intent.getIntExtra(AddNoteActivity.PRIORITY_KEY, 1);
 
-                            Note note = new Note(title, description, priority);
+                            Note note = new Note(title, description, 1);
                             noteViewModel.insertNote(note);
                             Toast.makeText(MainActivity.this, "Note Saved", Toast.LENGTH_SHORT).show();
                         } else {

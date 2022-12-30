@@ -25,22 +25,15 @@ public class AddNoteActivity extends AppCompatActivity {
         addNoteBinding = ActivityAddNoteBinding.inflate(getLayoutInflater());
         setContentView(addNoteBinding.getRoot());
 
-
-        addNoteBinding.numberPickerPriority.setMinValue(1);
-        addNoteBinding.numberPickerPriority.setMaxValue(10);
-
         setSupportActionBar(addNoteBinding.toolbar);
-
 
         Intent editIntent = getIntent();
         if (editIntent.hasExtra(ID_KEY)){
             setTitle("Edit Note");
             String title = editIntent.getStringExtra(TITLE_KEY);
             String description = editIntent.getStringExtra(DESCRIPTION_KEY);
-            int priority = editIntent.getIntExtra(PRIORITY_KEY, 1);
             addNoteBinding.titleEt.setText(title);
             addNoteBinding.descriptionEt.setText(description);
-            addNoteBinding.numberPickerPriority.setValue(priority);
         }else{
             setTitle("Add Note");
         }
@@ -66,7 +59,6 @@ public class AddNoteActivity extends AppCompatActivity {
     private void saveNote() {
         String title = addNoteBinding.titleLayout.getEditText().getText().toString();
         String description = addNoteBinding.descriptionLayout.getEditText().getText().toString();
-        int priority = addNoteBinding.numberPickerPriority.getValue();
 
         if (title.trim().isEmpty() || description.trim().isEmpty()) {
             Toast.makeText(this, "Please insert title and description for this note!", Toast.LENGTH_SHORT).show();
@@ -76,7 +68,6 @@ public class AddNoteActivity extends AppCompatActivity {
         Intent intent = new Intent();
         intent.putExtra(TITLE_KEY, title);
         intent.putExtra(DESCRIPTION_KEY, description);
-        intent.putExtra(PRIORITY_KEY, priority);
 
         int id = getIntent().getIntExtra(ID_KEY, -1);
         if (id!= -1){

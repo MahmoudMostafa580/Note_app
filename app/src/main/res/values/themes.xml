@@ -15,7 +15,7 @@
         <!-- Customize your theme here. -->
         <item name="titleTextColor">@color/white</item>
     </style>
-    <style name="toolBar" parent="Widget.Material3.Toolbar">
+    <style name="toolBar" parent="Widget.AppCompat.Toolbar">
         <item name="titleTextColor">@color/white</item>
         <item name="titleTextAppearance">@style/TextAppearance.Material3.ActionBar.Title</item>
     </style>
