@@ -179,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
                 noteViewModel.getAllNotesAsc().observe(MainActivity.this, new Observer<List<Note>>() {
                     @Override
                     public void onChanged(List<Note> notes) {
-                        noteAdapter.setNotes(notes);
+                        noteAdapter.swapItems(notes);
                     }
                 });
                 return true;
@@ -187,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
                 noteViewModel.getAllNotes().observe(MainActivity.this, new Observer<List<Note>>() {
                     @Override
                     public void onChanged(List<Note> notes) {
-                        noteAdapter.setNotes(notes);
+                        noteAdapter.swapItems(notes);
                     }
                 });
                 return true;
@@ -195,7 +195,7 @@ public class MainActivity extends AppCompatActivity {
                 noteViewModel.getAllNotesWithTime().observe(MainActivity.this, new Observer<List<Note>>() {
                     @Override
                     public void onChanged(List<Note> notes) {
-                        noteAdapter.setNotes(notes);
+                        noteAdapter.swapItems(notes);
                     }
                 });
                 return true;

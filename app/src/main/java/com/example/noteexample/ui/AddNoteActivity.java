@@ -89,8 +89,8 @@ public class AddNoteActivity extends AppCompatActivity {
             priority = 1;
         }
 
-        if (title.trim().isEmpty() || description.trim().isEmpty()) {
-            Toast.makeText(this, "Please insert title and description for this note!", Toast.LENGTH_SHORT).show();
+        if (title.trim().isEmpty() || description.trim().isEmpty() || priorityString.isEmpty()) {
+            Toast.makeText(this, "Please insert title and description and select priority for this note!", Toast.LENGTH_SHORT).show();
             return;
         }
 
