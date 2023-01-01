@@ -19,8 +19,9 @@ public class AddNoteActivity extends AppCompatActivity {
     public static final String TITLE_KEY = "title";
     public static final String DESCRIPTION_KEY = "description";
     public static final String PRIORITY_KEY = "priority";
-    public static final String TIME_KEY= "time";
+    public static final String TIME_KEY = "time";
     private ArrayAdapter<String> priorityAdapter;
+    private int time = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,13 +38,13 @@ public class AddNoteActivity extends AppCompatActivity {
             setTitle("Edit Note");
             String title = editIntent.getStringExtra(TITLE_KEY);
             String description = editIntent.getStringExtra(DESCRIPTION_KEY);
-
-            int priority = editIntent.getIntExtra(PRIORITY_KEY,1);
-            if (priority==1){
+            time = editIntent.getIntExtra(TIME_KEY, 0);
+            int priority = editIntent.getIntExtra(PRIORITY_KEY, 1);
+            if (priority == 1) {
                 addNoteBinding.priorityActv.setText(priorities[2]);
-            }else if (priority==2){
+            } else if (priority == 2) {
                 addNoteBinding.priorityActv.setText(priorities[1]);
-            }else if (priority==3){
+            } else if (priority == 3) {
                 addNoteBinding.priorityActv.setText(priorities[0]);
             }
             addNoteBinding.titleEt.setText(title);
@@ -51,7 +52,7 @@ public class AddNoteActivity extends AppCompatActivity {
         } else {
             setTitle("Add Note");
         }
-        priorityAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,priorities);
+        priorityAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, priorities);
         addNoteBinding.priorityActv.setAdapter(priorityAdapter);
 
 
@@ -78,15 +79,15 @@ public class AddNoteActivity extends AppCompatActivity {
         String title = addNoteBinding.titleLayout.getEditText().getText().toString();
         String description = addNoteBinding.descriptionLayout.getEditText().getText().toString();
         String priorityString = addNoteBinding.priorityLayout.getEditText().getText().toString();
-        int time = (int) System.currentTimeMillis();
+
 
         int priority;
-        if (priorityString.equals("High Priority")){
-            priority=3;
-        }else if (priorityString.equals("Medium Priority")){
-            priority=2;
-        }else{
-            priority=1;
+        if (priorityString.equals("High Priority")) {
+            priority = 3;
+        } else if (priorityString.equals("Medium Priority")) {
+            priority = 2;
+        } else {
+            priority = 1;
         }
 
         if (title.trim().isEmpty() || description.trim().isEmpty()) {
@@ -97,12 +98,15 @@ public class AddNoteActivity extends AppCompatActivity {
         Intent intent = new Intent();
         intent.putExtra(TITLE_KEY, title);
         intent.putExtra(DESCRIPTION_KEY, description);
-        intent.putExtra(PRIORITY_KEY,priority);
+        intent.putExtra(PRIORITY_KEY, priority);
         intent.putExtra(TIME_KEY, time);
 
         int id = getIntent().getIntExtra(ID_KEY, -1);
         if (id != -1) {
             intent.putExtra(ID_KEY, id);
+        }
+        if (time != 0) {
+            intent.putExtra(TIME_KEY, time);
         }
         setResult(RESULT_OK, intent);
         finish();

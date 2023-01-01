@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
                             String title = intent.getStringExtra(AddNoteActivity.TITLE_KEY);
                             String description = intent.getStringExtra(AddNoteActivity.DESCRIPTION_KEY);
                             int priority = intent.getIntExtra(AddNoteActivity.PRIORITY_KEY,3);
-                            int time = intent.getIntExtra(AddNoteActivity.TIME_KEY,0);
+                            int time = (int)System.currentTimeMillis();
                             Note note = new Note(title, description, priority, time);
                             noteViewModel.insertNote(note);
                             Toast.makeText(MainActivity.this, "Note Saved", Toast.LENGTH_SHORT).show();
@@ -155,6 +155,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra(AddNoteActivity.TITLE_KEY, note.getTitle());
                 intent.putExtra(AddNoteActivity.DESCRIPTION_KEY, note.getContent());
                 intent.putExtra(AddNoteActivity.PRIORITY_KEY, note.getPriority());
+                intent.putExtra(AddNoteActivity.TIME_KEY, note.getTime());
                 editLauncher.launch(intent);
             }
         });
