@@ -46,5 +46,9 @@ public class NoteViewModel extends AndroidViewModel {
         allNotes = repository.getAllNotesAsc();
         return allNotes;
     }
+    public LiveData<List<Note>> getAllNotesWithTime(){
+        allNotes = repository.getAllNotesWithTime();
+        return allNotes;
+    }
 
 }

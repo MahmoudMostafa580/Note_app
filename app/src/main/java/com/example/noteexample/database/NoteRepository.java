@@ -39,6 +39,9 @@ public class NoteRepository {
     public LiveData<List<Note>> getAllNotesAsc(){
         return noteDao.getAllNotesAsc();
     }
+    public LiveData<List<Note>> getAllNotesWithTime(){
+        return noteDao.getAllNotesWithTime();
+    }
 
     private static class InsertNoteAsyncTask extends AsyncTask<Note, Void, Void>{
 

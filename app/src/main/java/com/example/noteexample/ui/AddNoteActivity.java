@@ -19,6 +19,7 @@ public class AddNoteActivity extends AppCompatActivity {
     public static final String TITLE_KEY = "title";
     public static final String DESCRIPTION_KEY = "description";
     public static final String PRIORITY_KEY = "priority";
+    public static final String TIME_KEY= "time";
     private ArrayAdapter<String> priorityAdapter;
 
     @Override
@@ -36,6 +37,7 @@ public class AddNoteActivity extends AppCompatActivity {
             setTitle("Edit Note");
             String title = editIntent.getStringExtra(TITLE_KEY);
             String description = editIntent.getStringExtra(DESCRIPTION_KEY);
+
             int priority = editIntent.getIntExtra(PRIORITY_KEY,1);
             if (priority==1){
                 addNoteBinding.priorityActv.setText(priorities[2]);
@@ -76,6 +78,8 @@ public class AddNoteActivity extends AppCompatActivity {
         String title = addNoteBinding.titleLayout.getEditText().getText().toString();
         String description = addNoteBinding.descriptionLayout.getEditText().getText().toString();
         String priorityString = addNoteBinding.priorityLayout.getEditText().getText().toString();
+        int time = (int) System.currentTimeMillis();
+
         int priority;
         if (priorityString.equals("High Priority")){
             priority=3;
@@ -94,6 +98,7 @@ public class AddNoteActivity extends AppCompatActivity {
         intent.putExtra(TITLE_KEY, title);
         intent.putExtra(DESCRIPTION_KEY, description);
         intent.putExtra(PRIORITY_KEY,priority);
+        intent.putExtra(TIME_KEY, time);
 
         int id = getIntent().getIntExtra(ID_KEY, -1);
         if (id != -1) {

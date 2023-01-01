@@ -108,8 +108,8 @@ public class MainActivity extends AppCompatActivity {
                             String title = intent.getStringExtra(AddNoteActivity.TITLE_KEY);
                             String description = intent.getStringExtra(AddNoteActivity.DESCRIPTION_KEY);
                             int priority = intent.getIntExtra(AddNoteActivity.PRIORITY_KEY,3);
-
-                            Note note = new Note(title, description, priority);
+                            int time = intent.getIntExtra(AddNoteActivity.TIME_KEY,0);
+                            Note note = new Note(title, description, priority, time);
                             noteViewModel.insertNote(note);
                             Toast.makeText(MainActivity.this, "Note Saved", Toast.LENGTH_SHORT).show();
                         } else {
@@ -138,7 +138,8 @@ public class MainActivity extends AppCompatActivity {
                             String title = result.getData().getStringExtra(AddNoteActivity.TITLE_KEY);
                             String description = result.getData().getStringExtra(AddNoteActivity.DESCRIPTION_KEY);
                             int priority = result.getData().getIntExtra(AddNoteActivity.PRIORITY_KEY, 1);
-                            Note note = new Note(title, description, priority);
+                            int time = result.getData().getIntExtra(AddNoteActivity.TIME_KEY,0);
+                            Note note = new Note(title, description, priority,time);
                             note.setId(id);
                             noteViewModel.updateNote(note);
                             Toast.makeText(MainActivity.this, "Note updated successfully", Toast.LENGTH_SHORT).show();
@@ -190,7 +191,12 @@ public class MainActivity extends AppCompatActivity {
                 });
                 return true;
             case R.id.most_recent:
-
+                noteViewModel.getAllNotesWithTime().observe(MainActivity.this, new Observer<List<Note>>() {
+                    @Override
+                    public void onChanged(List<Note> notes) {
+                        noteAdapter.setNotes(notes);
+                    }
+                });
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
