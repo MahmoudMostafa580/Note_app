@@ -107,8 +107,9 @@ public class MainActivity extends AppCompatActivity {
                             Intent intent = result.getData();
                             String title = intent.getStringExtra(AddNoteActivity.TITLE_KEY);
                             String description = intent.getStringExtra(AddNoteActivity.DESCRIPTION_KEY);
+                            int priority = intent.getIntExtra(AddNoteActivity.PRIORITY_KEY,3);
 
-                            Note note = new Note(title, description, 1);
+                            Note note = new Note(title, description, priority);
                             noteViewModel.insertNote(note);
                             Toast.makeText(MainActivity.this, "Note Saved", Toast.LENGTH_SHORT).show();
                         } else {

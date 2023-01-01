@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Note Example</string>
+    <string-array name="priorities">
+        <item>High Priority</item>
+        <item>Medium Priority</item>
+        <item>Low Priority</item>
+    </string-array>
 </resources>
