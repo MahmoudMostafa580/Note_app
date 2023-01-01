@@ -20,7 +20,6 @@ public class NoteViewModel extends AndroidViewModel {
     public NoteViewModel(@NonNull Application application) {
         super(application);
         repository = new NoteRepository(application);
-        allNotes = repository.getAllNotes();
     }
 
     public void insertNote(Note note){
@@ -40,6 +39,11 @@ public class NoteViewModel extends AndroidViewModel {
     }
 
     public LiveData<List<Note>> getAllNotes(){
+        allNotes = repository.getAllNotes();
+        return allNotes;
+    }
+    public LiveData<List<Note>> getAllNotesAsc(){
+        allNotes = repository.getAllNotesAsc();
         return allNotes;
     }
 

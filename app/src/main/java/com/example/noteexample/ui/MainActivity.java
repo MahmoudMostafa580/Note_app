@@ -173,6 +173,25 @@ public class MainActivity extends AppCompatActivity {
             case R.id.delete_all_note:
                 deleteAllNotes();
                 return true;
+            case R.id.low_priority:
+                noteViewModel.getAllNotesAsc().observe(MainActivity.this, new Observer<List<Note>>() {
+                    @Override
+                    public void onChanged(List<Note> notes) {
+                        noteAdapter.setNotes(notes);
+                    }
+                });
+                return true;
+            case R.id.high_priority:
+                noteViewModel.getAllNotes().observe(MainActivity.this, new Observer<List<Note>>() {
+                    @Override
+                    public void onChanged(List<Note> notes) {
+                        noteAdapter.setNotes(notes);
+                    }
+                });
+                return true;
+            case R.id.most_recent:
+
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
